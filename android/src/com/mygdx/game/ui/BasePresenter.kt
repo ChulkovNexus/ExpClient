@@ -6,11 +6,12 @@ open class BasePresenter<V> (var v: V) {
 
     val subscribers = CompositeDisposable()
 
-    fun onStart() {
+    open fun onStart() {
 
     }
 
-    fun onPause() {
-
+    open fun onPause() {
+        subscribers.dispose()
+        subscribers.clear()
     }
 }

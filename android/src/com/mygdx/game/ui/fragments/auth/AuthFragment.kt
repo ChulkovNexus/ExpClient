@@ -32,4 +32,8 @@ class AuthFragment : Fragment(), AuthPresenter.AuthView {
         }
     }
 
+    override fun showProgress(boolean: Boolean) {
+        btn_login.visibility = if (boolean) View.GONE else View.VISIBLE
+        login_progress.visibility = if (!boolean) View.GONE else View.VISIBLE
+    }
 }

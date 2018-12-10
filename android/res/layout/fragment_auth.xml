@@ -20,6 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="6"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
@@ -51,6 +52,12 @@
                 android:id="@+id/btn_login"
                 android:text="@string/login"
                 android:layout_height="wrap_content" />
+
+            <ProgressBar
+                android:id="@+id/login_progress"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <View

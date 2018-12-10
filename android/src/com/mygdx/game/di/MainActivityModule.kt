@@ -1,6 +1,7 @@
 package com.mygdx.game.di
 
 import com.mygdx.game.ui.fragments.auth.AuthFragment
+import com.mygdx.game.ui.fragments.game_screen.GameScreenFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,5 +11,9 @@ interface MainActivityModule {
 
     @FragmentScope
     @ContributesAndroidInjector(modules = [FragmentsModule::class])
-    fun myFragment(): AuthFragment
+    fun authFragment(): AuthFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [FragmentsModule::class])
+    fun gameFragment(): GameScreenFragment
 }
