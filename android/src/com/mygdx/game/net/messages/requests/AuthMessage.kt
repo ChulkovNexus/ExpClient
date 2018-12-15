@@ -25,6 +25,4 @@ class AuthMessage : BaseMessage.ApiMessage {
     var login = ""
     var password = ""
 
-//response
-    var token = ""
 }

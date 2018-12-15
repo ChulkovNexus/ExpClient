@@ -3,7 +3,9 @@ package com.mygdx.game.net
 import android.text.TextUtils
 import com.google.gson.Gson
 import com.mygdx.game.net.messages.requests.AuthMessage
+import com.mygdx.game.net.messages.requests.GetMap
 import com.mygdx.game.net.messages.responses.AuthResponse
+import com.mygdx.game.net.messages.responses.GetMapResponse
 import com.mygdx.game.utils.Logger
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
@@ -79,16 +81,17 @@ class SocketService : WebSocketListener() {
 
     private fun parseAsObject(action: String, message: String, ns: String) {
         var response : BaseMessage.ApiMessage? = null
-        when (action) {
-            AuthMessage.ACTION -> {
-                response = gson.fromJson(message, AuthResponse::class.java)
-            }
+        response = when (action) {
+            AuthMessage.ACTION -> gson.fromJson(message, AuthResponse::class.java)
+            GetMap.ACTION -> gson.fromJson(message, GetMapResponse::class.java)
+            else -> null
         }
 
         if (response != null) {
             val callback = lookingForCallback(ns)
             if (callback != null) {
                 callback.response.onNext(response)
+                callbacks.remove(callback)
             }
             postGlobalMessage(action, response)
         } else {

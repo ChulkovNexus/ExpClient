@@ -13,7 +13,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="2" />
 
         <LinearLayout
@@ -30,6 +30,7 @@
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/et_login"
                     android:layout_width="match_parent"
+                    android:text="katia"
                     android:layout_height="wrap_content"
                     android:hint="@string/login" />
 
@@ -42,6 +43,7 @@
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/et_password"
                     android:layout_width="match_parent"
+                    android:text="12345"
                     android:layout_height="wrap_content"
                     android:hint="@string/password" />
 
@@ -62,7 +64,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="2" />
 
     </LinearLayout>

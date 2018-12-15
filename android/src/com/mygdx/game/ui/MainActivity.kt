@@ -3,6 +3,7 @@ package com.mygdx.game.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
+import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.mygdx.game.R
 import com.mygdx.game.di.DataManager
 import com.mygdx.game.net.SocketService
@@ -11,7 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity() , AndroidFragmentApplication.Callbacks{
 
     @Inject
     lateinit var socketService: SocketService//Singleton scope
@@ -53,4 +54,6 @@ class MainActivity : BaseActivity() {
         subs.clear()
         socketService.disconnect()
     }
+
+    override fun exit() { }
 }

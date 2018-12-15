@@ -1,18 +1,23 @@
 package com.mygdx.game.ui.fragments.game_screen
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mygdx.game.R
+import com.badlogic.gdx.backends.android.AndroidFragmentApplication
+import com.mygdx.game.models.MapTile
+import com.mygdx.game.ui.game.MyGdxGame
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class GameScreenFragment : Fragment(), GameScreenPresenter.GameScreenView {
+
+class GameScreenFragment : AndroidFragmentApplication(), GameScreenPresenter.GameScreenView {
+
 
     @Inject
     lateinit var presenter: GameScreenPresenter
+    lateinit var game: MyGdxGame
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +26,16 @@ class GameScreenFragment : Fragment(), GameScreenPresenter.GameScreenView {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_game_screen, container, false)
+        game = MyGdxGame()
+        return initializeForView(game)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter.loadMap()
+    }
+
+    override fun updateMap(map: ArrayList<ArrayList<MapTile>>) {
+        game.setNewWorldMap(map)
     }
 }
