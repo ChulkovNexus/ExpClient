@@ -26,18 +26,20 @@ class TileForDrawing {
                 MapTile.LandType.ICE_GROUND -> Color(0.63f, 0.67f, 0.96f, 1f)
             }
         }
+
+        private var batch : SpriteBatch = SpriteBatch()
     }
 
-    private var buffer: FrameBuffer = FrameBuffer(Pixmap.Format.RGBA4444, TextureGenerator.TILE_SIDE_SIZE, TextureGenerator.TILE_SIDE_SIZE, false)
-    private var batch : SpriteBatch = SpriteBatch()
+    private lateinit var buffer: FrameBuffer
     private lateinit var texture: TextureRegion
     private var textureColor = Color(1f,1f,1f,1f)
 
     fun beginCreation() {
         batch.projectionMatrix.setToOrtho2D(0f, 0f, TextureGenerator.TILE_SIDE_SIZE.toFloat(), TextureGenerator.TILE_SIDE_SIZE.toFloat())
         batch.enableBlending()
-        buffer.begin()
+        buffer = FrameBuffer(Pixmap.Format.RGBA4444, TextureGenerator.TILE_SIDE_SIZE, TextureGenerator.TILE_SIDE_SIZE, false)
         batch.begin()
+        buffer.begin()
         batch.color = textureColor
     }
 
@@ -45,7 +47,7 @@ class TileForDrawing {
         batch.color = Color(1f,1f,1f,1f)
         batch.end()
         buffer.end()
-        batch.dispose()
+//        batch.dispose()
         texture = TextureRegion(buffer.colorBufferTexture)
     }
 

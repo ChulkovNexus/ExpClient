@@ -9,12 +9,11 @@ class MapTile {
     @SerializedName("land_type")
     lateinit var landType: LandType
 
-//                self.top_edge_type,
-//                self.left_edge_type,
-//                self.right_edge_type,
-//                self.bot_edge_type
     @SerializedName("edge_types")
     lateinit var edgeTypes: ArrayList<Int>
+
+    @SerializedName("river_edges")
+    lateinit var riverEdges: ArrayList<RiverEdges>
 
 
     fun getTopEdgeType(): Int {
@@ -45,5 +44,24 @@ class MapTile {
         OCEAN,
         @SerializedName("LandType.ICE_GROUND")
         ICE_GROUND
+    }
+
+    enum class RiverEdges {
+        @SerializedName("LandType.WEST")
+        WEST,
+        @SerializedName("LandType.WEST_NORTH")
+        WEST_NORTH,
+        @SerializedName("LandType.NORTH")
+        NORTH,
+        @SerializedName("LandType.EAST_NORTH")
+        EAST_NORTH,
+        @SerializedName("LandType.EAST")
+        EAST,
+        @SerializedName("LandType.EAST_SOUTH")
+        EAST_SOUTH,
+        @SerializedName("LandType.SOUTH")
+        SOUTH,
+        @SerializedName("LandType.WEST_SOUTH")
+        WEST_SOUTH
     }
 }

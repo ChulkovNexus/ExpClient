@@ -44,12 +44,10 @@ class TextureGenerator {
             tile = createTexture(mapTile, colorForLandType)
             tiles[textureName] = tile
         }
-        Logger.log("createTexture $textureName")
         return tile.getTexture()
     }
 
     private fun createTexture(mapTile: MapTile, colorForLandType: Color): TileForDrawing {
-
         val tileForDrawing = TileForDrawing()
         tileForDrawing.setTextureColor(colorForLandType)
         tileForDrawing.beginCreation()
