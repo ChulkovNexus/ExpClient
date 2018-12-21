@@ -1,5 +1,5 @@
 map_textures.png
-size: 286, 202
+size: 328, 202
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -17,9 +17,16 @@ r1
   orig: 40, 200
   offset: 0, 0
   index: -1
-tile_main_box
+river1
   rotate: false
   xy: 85, 1
+  size: 40, 200
+  orig: 40, 200
+  offset: 0, 0
+  index: -1
+tile_main_box
+  rotate: false
+  xy: 127, 1
   size: 200, 200
   orig: 200, 200
   offset: 0, 0

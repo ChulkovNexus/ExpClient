@@ -1,19 +1,21 @@
 package com.mygdx.game.models
 
 import com.google.gson.annotations.SerializedName
+import java.lang.IllegalStateException
 
 class MapTile {
 
     var x = 0
     var y = 0
+
     @SerializedName("land_type")
     lateinit var landType: LandType
 
     @SerializedName("edge_types")
     lateinit var edgeTypes: ArrayList<Int>
 
-    @SerializedName("river_edges")
-    lateinit var riverEdges: ArrayList<RiverEdges>
+    @SerializedName("river_chanel")
+    var riverEdges: ArrayList<RiverChannelPart>? = null
 
 
     fun getTopEdgeType(): Int {
@@ -27,6 +29,41 @@ class MapTile {
     }
     fun getBotEdgeType(): Int {
         return edgeTypes[3]
+    }
+
+    class RiverChannelPart {
+        var edge = 0
+        var start = 0
+        var end = 0
+
+        fun getEdgeType(): RiverEdges {
+            return when (edge) {
+                0-> RiverEdges.WEST
+                2-> RiverEdges.NORTH
+                4-> RiverEdges.EAST
+                6-> RiverEdges.SOUTH
+                else -> throw IllegalStateException("wrong river edge type has come from server")
+            }
+        }
+
+        fun getStartFlowType(): RiverFlowDirection{
+            return getFlowDirection(start)
+        }
+
+        fun getEndFlowType(): RiverFlowDirection{
+            return getFlowDirection(end)
+        }
+
+        private fun getFlowDirection(value: Int): RiverFlowDirection {
+            return when (value) {
+                0-> RiverFlowDirection.RIGHT
+                1-> RiverFlowDirection.LEFT
+                2-> RiverFlowDirection.FORWARD
+                3-> RiverFlowDirection.BEGINNING
+                4-> RiverFlowDirection.END
+                else -> throw IllegalStateException("wrong river flow type has come from server")
+            }
+        }
     }
 
     enum class LandType {
@@ -47,21 +84,17 @@ class MapTile {
     }
 
     enum class RiverEdges {
-        @SerializedName("LandType.WEST")
         WEST,
-        @SerializedName("LandType.WEST_NORTH")
-        WEST_NORTH,
-        @SerializedName("LandType.NORTH")
         NORTH,
-        @SerializedName("LandType.EAST_NORTH")
-        EAST_NORTH,
-        @SerializedName("LandType.EAST")
         EAST,
-        @SerializedName("LandType.EAST_SOUTH")
-        EAST_SOUTH,
-        @SerializedName("LandType.SOUTH")
-        SOUTH,
-        @SerializedName("LandType.WEST_SOUTH")
-        WEST_SOUTH
+        SOUTH
+    }
+
+    enum class RiverFlowDirection {
+        RIGHT,
+        LEFT,
+        FORWARD,
+        BEGINNING,
+        END
     }
 }

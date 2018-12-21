@@ -27,6 +27,14 @@ class TileForDrawing {
             }
         }
 
+        fun getRiverName(riverEdges: ArrayList<MapTile.RiverChannelPart>): String {
+            var result = ""
+            riverEdges.forEach {
+                result += "${it.getEdgeType()} ${it.getStartFlowType()} ${it.getEndFlowType()},"
+            }
+            return result
+        }
+
         private var batch : SpriteBatch = SpriteBatch()
     }
 
@@ -63,24 +71,24 @@ class TileForDrawing {
         batch.draw(atlas, 0f, 0f)
     }
 
-    fun addTopTexture(atlas: TextureAtlas.AtlasRegion) {
-        atlas.flip(true, true)
-        batch.draw(atlas, 0f, 40f, 0f, 0f, atlas.packedWidth.toFloat(), atlas.packedHeight.toFloat(), 1f, 1f, -90f)
-        atlas.flip(true, true)
-    }
-
-    fun addRightTexture(atlas: TextureAtlas.AtlasRegion) {
-        batch.draw(atlas, 0f, 0f)
-    }
-
     fun addBotTexture(atlas: TextureAtlas.AtlasRegion) {
         atlas.flip(true, true)
-        batch.draw(atlas, 0f, 200f, 0f, 0f, atlas.packedWidth.toFloat(), atlas.packedHeight.toFloat(), 1f, 1f, -90f)
+        batch.draw(atlas, 0f, 73f, 0f, 0f, atlas.packedWidth.toFloat(), atlas.packedHeight.toFloat(), 1f, 1f, -90f)
         atlas.flip(true, true)
     }
 
     fun addLeftTexture(atlas: TextureAtlas.AtlasRegion) {
-        batch.draw(atlas, 160f, 0f)
+        batch.draw(atlas, 0f, 0f)
+    }
+
+    fun addTopTexture(atlas: TextureAtlas.AtlasRegion) {
+        atlas.flip(true, true)
+        batch.draw(atlas, 0f, 300f, 0f, 0f, atlas.packedWidth.toFloat(), atlas.packedHeight.toFloat(), 1f, 1f, -90f)
+        atlas.flip(true, true)
+    }
+
+    fun addRightTexture(atlas: TextureAtlas.AtlasRegion) {
+        batch.draw(atlas, 230f, 0f)
     }
 
 }

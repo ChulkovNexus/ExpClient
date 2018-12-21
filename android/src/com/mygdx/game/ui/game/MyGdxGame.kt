@@ -31,7 +31,7 @@ class MyGdxGame : ApplicationAdapter(), InputProcessor {
     }
 
     override fun resize(width: Int, height: Int) {
-        camera.setToOrtho(false, width.toFloat(), height.toFloat())
+        camera.setToOrtho(true, width.toFloat(), height.toFloat())
         camera.update()
     }
 
@@ -69,18 +69,26 @@ class MyGdxGame : ApplicationAdapter(), InputProcessor {
         time = System.currentTimeMillis()
         val layers = map.layers
 
-        val layer1 = TiledMapTileLayer(worldMap.size, worldMap[0].size, 160, 160)
+        val layer1 = TiledMapTileLayer(worldMap.size, worldMap[0].size, 230, 230)
         for (row in worldMap) {
-//            var str = ""
             for (worldCell in row) {
                 val cell = TiledMapTileLayer.Cell()
                 cell.tile = StaticTiledMapTile(textureGenerator.createTextureForMapTile(worldMap, worldCell.x, worldCell.y))
                 layer1.setCell(worldCell.x, worldCell.y, cell)
-//                str += " ${worldCell.landType}"
             }
-//            Logger.log(str)
         }
         layers.add(layer1)
+//        val riversLayer = TiledMapTileLayer(worldMap.size, worldMap[0].size, 160, 160)
+//        for (row in worldMap) {
+//            for (worldCell in row) {
+//                if (worldCell.riverEdges != null) {
+//                    val cell = TiledMapTileLayer.Cell()
+//                    cell.tile = StaticTiledMapTile(textureGenerator.getRiverTile(worldMap, worldCell.x, worldCell.y))
+//                    riversLayer.setCell(worldCell.x, worldCell.y, cell)
+//                }
+//            }
+//        }
+//        layers.add(riversLayer)
         Logger.log("updateMapFinished ${System.currentTimeMillis() - time}")
 
     }
@@ -89,7 +97,7 @@ class MyGdxGame : ApplicationAdapter(), InputProcessor {
     private var lastPointY = 0
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {
         val deltax = lastPointX - screenX
-        val deltay = screenY - lastPointY
+        val deltay = lastPointY - screenY
         lastPointX = screenX
         lastPointY = screenY
         camera.position.set(camera.position.x + deltax, camera.position.y + deltay, 0f)
